@@ -2,7 +2,7 @@
 """0x00. Personal data"""
 
 from typing import List
-from re import sub
+import re
 
 
 def filter_datum(
@@ -11,5 +11,5 @@ def filter_datum(
     """Returns the log message obfuscated"""
     for field in fields:
         replacement = f"{field}={redaction}{separator}"
-        message = sub(f"{field}=.*?{separator}", replacement, message)
+        message = re.sub(f"{field}=.*?{separator}", replacement, message)
     return message
