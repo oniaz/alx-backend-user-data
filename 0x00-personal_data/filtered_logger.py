@@ -26,7 +26,8 @@ class RedactingFormatter(logging.Formatter):
         Format the log record and redact specified fields from the message
         """
         return filter_datum(
-            self.fields, self.REDACTION, record.getMessage(), self.SEPARATOR)
+            self.fields, self.REDACTION, super().format(record), self.SEPARATOR
+        )
 
 
 def filter_datum(
