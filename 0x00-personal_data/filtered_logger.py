@@ -4,6 +4,8 @@
 from typing import List
 import re
 import logging
+import os
+import mysql.connector
 
 
 PII_FIELDS = (
@@ -13,7 +15,6 @@ PII_FIELDS = (
 class RedactingFormatter(logging.Formatter):
     """ Redacting Formatter class
         """
-
     REDACTION = "***"
     FORMAT = "[HOLBERTON] %(name)s %(levelname)s %(asctime)-15s: %(message)s"
     SEPARATOR = ";"
@@ -54,3 +55,21 @@ def get_logger() -> logging.Logger:
     logger.addHandler(handler)
     logger.propagate = False
     return logger
+
+
+def get_db() -> mysql.connector.connection.MySQLConnection:
+    """Connect to the database and return the connection object"""
+
+    username = os.getenv("PERSONAL_DATA_DB_USERNAME", "root")
+    password = os.getenv("PERSONAL_DATA_DB_PASSWORD", "")
+    host = os.getenv("PERSONAL_DATA_DB_HOST", "localhost")
+    database = os.getenv("PERSONAL_DATA_DB_NAME")
+
+    db_connection = mysql.connector.connect(
+        user=username,
+        password=password,
+        host=host,
+        database=database
+    )
+
+    return db_connection
