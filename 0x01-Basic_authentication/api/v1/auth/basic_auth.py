@@ -78,4 +78,3 @@ class BasicAuth(Auth):
             decoded_b64_auth
         )
         return self.user_object_from_credentials(email, pwd)
-
