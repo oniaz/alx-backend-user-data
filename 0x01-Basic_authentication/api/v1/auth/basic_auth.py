@@ -16,4 +16,4 @@ class BasicAuth(Auth):
             not authorization_header.startswith('Basic ')
         ):
             return None
-        return authorization_header.removeprefix('Basic ')
+        return authorization_header[len('Basic '):]
