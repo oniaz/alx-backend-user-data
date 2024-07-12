@@ -5,6 +5,7 @@ from api.v1.auth.auth import Auth
 from api.v1.auth.auth import Auth
 from models.user import User
 from typing import TypeVar
+import uuid
 
 
 class SessionAuth(Auth):
